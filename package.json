@@ -13,6 +13,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "@nuxtjs/apollo": "^5.0.0-alpha.6",
     "@vitejs/plugin-vue": "^4.1.0",
     "autoprefixer": "^10.4.14",
     "nuxt": "^3.3.1",
@@ -21,8 +22,15 @@
     "tailwindcss": "^3.2.7"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.10",
     "@nuxtjs/tailwindcss": "^6.6.0",
+    "@rollup/plugin-graphql": "^2.0.3",
+    "@vue/apollo-composable": "^4.0.0-beta.4",
+    "graphql": "^15.8.0",
+    "graphql-tag": "^2.12.6",
     "nuxt-swiper": "^1.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "swiper": "^9.1.1",
     "vue": "^3.2.47"
   }

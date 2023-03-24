@@ -6,16 +6,22 @@
   </div>
 </template>
 
-<script>
+<script setup>
  import '@/assets/css/main.css'
- export default {
-   name: 'App',
-   // setup() {
-   //   // const {loading, data, error} = useQuery(GET_PHONES_QUERY)
-   //   // console.log(data)
-   //   return {}
-   // }
- }
+ import GET_PHONES_QUERY from "@/graphql/getPhones.query.gql";
+
+     const {loading, data, error} = useAsyncQuery(
+         GET_PHONES_QUERY,
+         {
+           pagination:{
+             offset: 2,
+             limit: 10
+           }
+         }
+     )
+     console.log(data)
+     console.log(error)
+
 </script>
 
 <style>

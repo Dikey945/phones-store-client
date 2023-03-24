@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+import graphql from "@rollup/plugin-graphql";
+
 export default defineNuxtConfig({
   runtimeConfig: undefined,
   ssr: true,
@@ -21,6 +24,7 @@ export default defineNuxtConfig({
       modules: ['pagination', 'navigation'],
       }
     ],
+    '@nuxtjs/apollo',
   ],
   plugins: [
     { src: '~/plugins/font-awesome.ts' },
@@ -28,7 +32,13 @@ export default defineNuxtConfig({
   loading: {
     color: 'green',
     height: '5px',
-
+  },
+  apollo: {
+    clients: {
+      default: {
+        httpEndpoint: process.env.API_ENDPOINT || 'http://localhost:4000/graphql'
+      }
+    },
   },
   build: {
     postcss: {
@@ -39,5 +49,9 @@ export default defineNuxtConfig({
         },
       },
     },
+    transpile: [
+      '@apollo/client',
+      'ts-invariant/process',
+    ],
   }
 })

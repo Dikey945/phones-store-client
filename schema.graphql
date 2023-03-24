@@ -4,37 +4,28 @@ schema {
     query: Query
 }
 
-directive @cacheControl(maxAge: Int, scope: CacheControlScope) on OBJECT | FIELD_DEFINITION | INTERFACE
-
 type Phone {
-    id: ID
+    capacity: String
     category: String
-    phoneId: String
+    color: String
+    fullPrice: Int
+    id: ID
+    image: String
     itemId: String
     name: String
-    fullPrice: Int
+    phoneId: String
     price: Int
-    screen: String
-    capacity: String
-    color: String
     ram: String
+    screen: String
     year: Int
-    image: String
-}
-
-input Pagination {
-    offset: Int
-    limit: Int
 }
 
 type Query {
-    getPhones(pagination: Pagination, sort:String, first:Int): [Phone]
+    getAllPhones: [Phone]
+    getPhones(first: Int, pagination: Pagination, sort: String): [Phone]
 }
 
-enum CacheControlScope {
-    PRIVATE
-    PUBLIC
+input Pagination {
+    limit: Int
+    offset: Int
 }
-
-"The `Upload` scalar type represents a file upload."
-scalar Upload

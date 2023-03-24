@@ -1,0 +1,11 @@
+query  GetPhones($first: Int, $pagination: Pagination, $sort: String) {
+  getPhones(first: $first, pagination: $pagination, sort: $sort) {
+    id
+    name
+    price
+    image
+    screen
+    ram
+    capacity
+  }
+}
