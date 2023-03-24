@@ -27,6 +27,7 @@ export default {
   setup(props) {
     const direction = props.direction;
     const swiper = useSwiper();
+    console.log(swiper.value)
     const nextSlide = () => {
       if(direction === 'left') {
         swiper.value.slidePrev();

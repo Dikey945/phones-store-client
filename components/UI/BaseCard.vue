@@ -1,29 +1,29 @@
 <template>
-  <div class="flex flex-col">
-    <img :src="product.image" class="w-[208px] h-[196px] object-cover" alt="Product Image" />
-    <div>
-      <p>product.name</p>
+  <div class="w-[272px] h-[506px] flex flex-col p-[32px] border-[1px] border-gray-200 rounded-[10px] bg-white text-[12px] relative">
+    <img :src="url" class="w-[208px] h-[196px] object-contain" alt="Product Image" />
+    <div class="mt-[24px]">
+      <p class="text-[14px]">{{ product.name }}</p>
     </div>
     <div class="flex">
-      <p>product.fullPrice</p>
-      <p>product.price</p>
+      <p class="text-[22px] font-bold text-[#89939A] mr-[5px]">${{ product.fullPrice }}</p>
+      <p class="text-[22px] font-bold">${{ product.price }}</p>
     </div>
-    <br/>
-    <div>
+    <div class="h-0 border-[1px] rounded-[8px] border-gray-200"></div>
+    <div class="mt-[16px] flex flex-col space-y-[8px]">
       <div class="flex justify-between">
         <p>Screen</p>
-        <p>product.screen</p>
+        <p>{{ product.screen }}</p>
       </div>
       <div class="flex justify-between">
         <p>Capacity</p>
-        <p>product.capacity</p>
+        <p>{{ product.capacity }}</p>
       </div>
       <div class="flex justify-between">
         <p class="">RAM</p>
-        <p>product.ram</p>
+        <p>{{ product.ram }}</p>
       </div>
     </div>
-    <div>
+    <div class="absolute bottom-[32px]">
       <base-button>Add to cart</base-button>
       <button></button>
     </div>
@@ -33,20 +33,23 @@
 
 <script>
 import BaseButton from "~/components/UI/BaseButton.vue";
+import {computed} from "vue";
 
 export default {
   name: "Base",
   components: {BaseButton},
   props: ['product'],
   setup(props) {
-    const product = props.product;
+    const product = computed(() => props.product);
+    const url = computed(() => 'http://localhost:4000/' + product.value.image);
+    console.log(product)
     return {
-      product
+      product,
+      url
     }
   }
 }
 </script>
 
 <style scoped>
-
 </style>

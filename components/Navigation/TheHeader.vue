@@ -1,5 +1,5 @@
 <template>
-  <header class="flex pl-[24px] justify-between shadow-[0px_1px_0px_#E2E6E9]">
+  <header class="flex pl-[24px] justify-between shadow-[0px_1px_0px_#E2E6E9] bg-white">
     <div class="flex  space-x-[48px] items-center ">
       <nuxt-link to="/"><the-logo/></nuxt-link>
       <the-nav/>

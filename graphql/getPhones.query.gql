@@ -3,6 +3,7 @@ query  GetPhones($first: Int, $pagination: Pagination, $sort: String) {
     id
     name
     price
+    fullPrice
     image
     screen
     ram

@@ -14,10 +14,13 @@
             clickable: true,
             bulletClass: 'swiper-pagination-bullet',
           }"
+          effect='fade'
+          :fadeEffect="{
+            crossFade: true
+          }"
           :slides-per-view="1"
           :loop="true"
           :content="fill"
-
       >
         <slider-button direction="left" />
         <swiper-slide class="mx-auto w-[1040px] h-[400px]">
@@ -29,35 +32,36 @@
         <slider-button direction="right" />
       </swiper>
     </section>
+    <section class="h-[580px]">
+      <product-slider title="Brand new models" :products="data"></product-slider>
+    </section>
   </section>
 </template>
 
-<script>
-import 'swiper/css';
+<script setup>
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import {EffectCreative, Navigation, Pagination} from 'swiper';
+  import {ref} from "vue";
+  import SliderButton from "~/components/UI/SliderButton.vue";
+  import GET_PHONES_QUERY from "~/graphql/getPhones.query.gql";
+  import ProductSlider from "~/components/UI/ProductSlider.vue";
 
-import 'swiper/css/navigation';
-import { Navigation, Pagination } from 'swiper'
-import {ref} from "vue";
-import SliderButton from "~/components/UI/SliderButton.vue";
-export default {
-  components: {SliderButton},
+  const {data} = useAsyncQuery(
+      GET_PHONES_QUERY,
+      {
+        first: 10
+      }
+  )
 
-  setup() {
-
-    const navigation = {
-      nextEl: 'swiper-button-next',
-      prevEl: 'swiper-button-prev'
-    };
-    return {
-      navigation,
-      modules: [ Pagination, Navigation],
-
-    }
-  }
-}
+  const navigation = {
+    nextEl: 'swiper-button-next',
+    prevEl: 'swiper-button-prev'
+  };
+  const modules = [Navigation, Pagination, EffectCreative];
 </script>
 
-<style>
+<style scoped>
 .swiper-pagination-bullet {
   width: 14px;
   height: 4px;
@@ -89,13 +93,14 @@ export default {
   margin-top: 50px;
   width: 1164px;
   height: 450px;
+  background-color: #F9FAFC;
 }
 
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #fff;
   height: 400px;
+  background-color: #F9FAFC;
 
   /* Center slide text vertically */
   display: flex;
