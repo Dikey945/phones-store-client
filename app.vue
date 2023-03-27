@@ -19,8 +19,6 @@
            }
          }
      )
-     console.log(data)
-     console.log(error)
 
 </script>
 

@@ -5,7 +5,6 @@
       class="flex flex-col mt-[30px]"
       :modules="modules"
       :loop="true"
-      :content="fill"
       :autoplay="{
         delay: 3000,
         disableOnInteraction: true
@@ -21,7 +20,7 @@
     </div>
 
     <swiper-slide v-for="product in products" :key="product.id">
-      <base-card :product="product"></base-card>
+      <base-card :product="product" :discount="discount"></base-card>
     </swiper-slide>
 
   </swiper>
@@ -33,24 +32,33 @@ import 'swiper/css/navigation';
 import BaseCard from "~/components/UI/BaseCard.vue";
 import SliderButton from "~/components/UI/SliderButton.vue";
 import {Navigation, Autoplay} from "swiper";
+import { computed, ref, watchEffect } from 'vue';
 
 export default {
   name: "ProductSlider",
-  components: {SliderButton, BaseCard},
-  props: ['title', 'products'],
+  components: { SliderButton, BaseCard },
+  props: ['title', 'products', 'discount'],
   setup(props) {
+    const discount = computed(() => props.discount);
     const title = computed(() => props.title);
-    const products = computed(() => props.products);
-    console.log(products.value.getPhones)
+    const productsData = ref([]);
+
+    watchEffect(() => {
+      if (props.products && props.products.getPhones) {
+        productsData.value = props.products.getPhones;
+      }
+    });
+
     const modules = [Navigation, Autoplay];
     return {
       title,
-      products: products.value.getPhones,
-      modules
+      products: productsData,
+      modules,
+      discount
     }
   }
-
 }
+
 </script>
 
 <style scoped>

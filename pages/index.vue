@@ -20,7 +20,6 @@
           }"
           :slides-per-view="1"
           :loop="true"
-          :content="fill"
       >
         <slider-button direction="left" />
         <swiper-slide class="mx-auto w-[1040px] h-[400px]">
@@ -32,8 +31,48 @@
         <slider-button direction="right" />
       </swiper>
     </section>
+
     <section class="h-[580px]">
       <product-slider title="Brand new models" :products="data"></product-slider>
+    </section>
+
+    <section class="mt-[80px]">
+      <h2>Shop by category</h2>
+      <div class="flex space-x-[16px] mt-[24px]">
+        <nuxt-link to="/phones">
+          <div class="flex flex-col ">
+            <div class="w-[368px] h-[368px] bg-[#6D6474] rounded-[10px] relative overflow-hidden">
+              <img class="absolute bottom-[-15%] right-[-15%] " src="@/assets/imgs/category-phones.png" alt="phone">
+            </div>
+            <h4 class="block mt-[24px]"> Mobile Phones</h4>
+            <p class="block mt-[4px] text-[#89939A]">96 models</p>
+          </div>
+        </nuxt-link>
+
+        <nuxt-link to="/tablets">
+          <div class="flex flex-col ">
+            <div class="w-[368px] h-[368px] bg-[#89939A] rounded-[10px] relative overflow-hidden">
+              <img class="w-[368px] h-[368px] object-contain absolute bottom-[-10%] right-[-10%]" src="@/assets/imgs/category-tablets.png" alt="tablets">
+            </div>
+            <h4 class="block mt-[24px]"> Tablets</h4>
+            <p class="block mt-[4px] text-[#89939A]">34 models</p>
+          </div>
+        </nuxt-link>
+
+        <nuxt-link to="/accessories">
+          <div class="flex flex-col">
+            <div class="w-[368px] h-[368px] bg-[#D53C51] rounded-[10px] overflow-hidden relative">
+              <img class="object-contain absolute bottom-0 right-[-70%] scale-[2.5]" src="@/assets/imgs/category-accessories.png" alt="phone">
+            </div>
+            <h4 class="block mt-[24px]"> Accessories</h4>
+            <p class="block mt-[4px] text-[#89939A]">100 models</p>
+          </div>
+        </nuxt-link>
+      </div>
+    </section>
+
+    <section class="h-[580px]">
+      <product-slider title="Hot prices" :products="data" discount="true"></product-slider>
     </section>
   </section>
 </template>
