@@ -1,11 +1,14 @@
 <template>
   <div class="w-[272px] h-[506px] flex flex-col p-[32px] border-[1px] border-gray-200 rounded-[10px] bg-white text-[12px] relative">
     <img :src="url" class="w-[208px] h-[196px] object-contain" alt="Product Image" />
-    <div class="mt-[24px]">
+    <div class="mt-[24px] h-[42px]">
       <p class="text-[14px]">{{ product.name }}</p>
     </div>
-    <div class="flex">
-      <p class="text-[22px] font-bold text-[#89939A] mr-[5px]">${{ product.fullPrice }}</p>
+    <div class="flex" v-if="!discount">
+      <p class="text-[22px] font-bold">${{ product.price }}</p>
+    </div>
+    <div class="flex" v-else>
+      <p class="text-[22px] font-bold text-[#89939A] mr-[5px] line-through">${{ product.fullPrice }}</p>
       <p class="text-[22px] font-bold">${{ product.price }}</p>
     </div>
     <div class="h-0 border-[1px] rounded-[8px] border-gray-200"></div>
@@ -38,14 +41,15 @@ import {computed} from "vue";
 export default {
   name: "Base",
   components: {BaseButton},
-  props: ['product'],
+  props: ['product', 'discount'],
   setup(props) {
     const product = computed(() => props.product);
-    const url = computed(() => 'http://localhost:4000/' + product.value.image);
-    console.log(product)
+    const discount = computed(() => props.discount);
+    const url = computed(() => 'http://localhost:4001/' + product.value.image);
     return {
       product,
-      url
+      url,
+      discount
     }
   }
 }
