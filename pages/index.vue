@@ -10,12 +10,9 @@
       <swiper
           class="h-[400px] w-[500px]"
           :modules="modules"
-          :pagination="{
-            clickable: true,
-            bulletClass: 'swiper-pagination-bullet',
-          }"
-          effect='fade'
-          :fadeEffect="{
+          :pagination="pagination"
+          effect="fade"
+          fade-effect="{
             crossFade: true
           }"
           :slides-per-view="1"
@@ -26,7 +23,7 @@
           <img src="@/assets/imgs/Banner.png" alt="logo">
         </swiper-slide>
         <swiper-slide >
-          <img src="@/assets/imgs/Banner.png" alt="logo">
+          <img src="@/assets/imgs/category-accessories.png" alt="logo">
         </swiper-slide>
         <slider-button direction="right" />
       </swiper>
@@ -80,7 +77,9 @@
 <script setup>
   import 'swiper/css';
   import 'swiper/css/navigation';
-  import {EffectCreative, Navigation, Pagination} from 'swiper';
+  import 'swiper/css/effect-fade';
+  import 'swiper/css/pagination';
+  import { EffectFade, Navigation, Pagination} from 'swiper';
   import {ref} from "vue";
   import SliderButton from "~/components/UI/SliderButton.vue";
   import GET_PHONES_QUERY from "~/graphql/getPhones.query.gql";
@@ -97,16 +96,27 @@
     nextEl: 'swiper-button-next',
     prevEl: 'swiper-button-prev'
   };
-  const modules = [Navigation, Pagination, EffectCreative];
+  const modules = [Navigation, Pagination, EffectFade];
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '"></span>';
+    }
+  }
 </script>
 
 <style scoped>
-.swiper-pagination-bullet {
+::v-global(.swiper-pagination) {
+  height: 10px;
+}
+::v-global(.swiper-pagination-bullet) {
   width: 14px;
   height: 4px;
   border-radius: 0;
+  background-color: #B4BDC4;
 }
-.swiper-pagination-bullet-active {
+
+::v-global(.swiper-pagination-bullet-active) {
   background-color: black;
 }
 .swiper-button-next, .swiper-button-prev {
