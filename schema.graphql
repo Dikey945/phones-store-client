@@ -23,6 +23,7 @@ type Phone {
 type Query {
     getAllPhones: [Phone]
     getPhones(first: Int, pagination: Pagination, sort: String): [Phone]
+    getPhonesCount: Int
 }
 
 input Pagination {

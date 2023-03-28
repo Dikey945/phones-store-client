@@ -35,13 +35,37 @@
       </div>
     </div>
   </section>
+  <section class="container">
+    <base-list class="mt-[24px]" :products="products.getPhones"></base-list>
+  </section>
+  <section class="flex justify-center mt-[40px]">
+    <the-pagination
+        :total="phonesQuantity.getPhonesCount"
+        per-page="20"
+    >
+
+    </the-pagination>
+  </section>
 </template>
 <script setup>
   import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
   import BaseRoute from "~/components/UI/BaseRoute.vue";
+  import BaseList from "~/components/UI/BaseList.vue";
+  import GET_PHONES_QUERY from "~/graphql/getPhones.query.gql";
+  import GET_PHONES_COUNT_QUERY from "~/graphql/getPhonesCount.query.gql";
+  import ThePagination from "~/components/Navigation/ThePagination.vue";
   const sort = ref('newest')
+  const {data: products} = useAsyncQuery(
+      GET_PHONES_QUERY,
+      {
+        first: 18
+      }
+  )
+  const {data: phonesQuantity} = useAsyncQuery(
+      GET_PHONES_COUNT_QUERY
+  )
+  console.log(phonesQuantity.value)
 
-  console.log(sort.value)
 
   const route = useRoute()
       .name.split('/')

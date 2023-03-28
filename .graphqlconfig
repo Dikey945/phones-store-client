@@ -4,7 +4,7 @@
   "extensions": {
     "endpoints": {
       "My GraphQL Endpoint": {
-        "url": "https://comments-db.herokuapp.com/graphql",
+        "url": "http://localhost:5050/graphql",
         "introspect": true
       }
     }
