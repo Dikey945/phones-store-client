@@ -36,7 +36,7 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: process.env.API_ENDPOINT || 'https://comments-db.herokuapp.com/graphql'
+        httpEndpoint: process.env.API_ENDPOINT || 'http://localhost:5050/graphql'
       }
     },
   },
