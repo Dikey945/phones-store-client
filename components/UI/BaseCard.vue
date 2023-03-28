@@ -45,7 +45,7 @@ export default {
   setup(props) {
     const product = computed(() => props.product);
     const discount = computed(() => props.discount);
-    const url = computed(() => 'http://localhost:4001/' + product.value.image);
+    const url = computed(() => 'https://comments-db.herokuapp.com/' + product.value.image);
     return {
       product,
       url,

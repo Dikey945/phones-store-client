@@ -36,7 +36,7 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: process.env.API_ENDPOINT || 'http://localhost:4001/graphql'
+        httpEndpoint: process.env.API_ENDPOINT || 'https://comments-db.herokuapp.com/graphql'
       }
     },
   },
@@ -52,6 +52,11 @@ export default defineNuxtConfig({
     transpile: [
       '@apollo/client',
       'ts-invariant/process',
+      "@fortawesome/vue-fontawesome",
+      "@fortawesome/fontawesome-svg-core",
+      "@fortawesome/pro-solid-svg-icons",
+      "@fortawesome/pro-regular-svg-icons",
+      "@fortawesome/free-brands-svg-icons",
     ],
   }
 })
