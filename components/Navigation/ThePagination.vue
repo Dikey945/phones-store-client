@@ -38,19 +38,18 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 export default {
   components: {FontAwesomeIcon},
   emits: ['changePage'],
-  props: ['perPage', 'total'],
+  props: ['perPage', 'total', 'sort'],
   name: "ThePagination",
   setup(props, {emit}) {
     const activePage = ref(0);
+    const sort = computed(() => props.sort);
     const perPage = computed(() => props.perPage);
     const total = computed(() => props.total);
     const pages = computed(() => Math.ceil(total.value / perPage.value));
-    watch(total, (newVal)=>{
-      console.log(newVal)
+    watch([perPage, sort], ()=> {
+      activePage.value = 0;
+      emit('changePage', activePage.value);
     })
-    console.log(perPage.value)
-    console.log(total.value)
-    console.log(pages.value)
     const isNextDisabled = computed(() => activePage.value === pages.value - 1);
 
     function changePage(page) {

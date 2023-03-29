@@ -7,7 +7,7 @@
       <h2>
         Mobile Phones
       </h2>
-      <p class="mt-[4px] text-[#89939A]">70 models</p>
+      <p class="mt-[4px] text-[#89939A]">{{ phonesQuantity?.getPhonesCount }} models</p>
     </div>
 
     <div class="flex space-x-[16px] mt-[40px]">
@@ -26,11 +26,14 @@
           class="text-[#89939A] text-[12px]"
         >Per page</span>
         <select
+            v-model="perPage"
             class="w-[128px] h-[40px] px-[12px] text-[#89939A] border-gray-400 border-[1px] rounded-[8px]"
         >
-          <option value="12"></option>
-          <option value="16"></option>
-          <option value="20"></option>
+          <option value="12">12</option>
+          <option selected value="16">16</option>
+          <option value="20">20</option>
+          <option value="24">24</option>
+
         </select>
       </div>
     </div>
@@ -40,8 +43,9 @@
   </section>
   <section class="flex justify-center mt-[40px]">
     <the-pagination
+        :sort="sort"
         :total="phonesQuantity?.getPhonesCount"
-        per-page="20"
+        :per-page="perPage"
         @changePage="changePageValue"
     >
 
@@ -57,30 +61,32 @@
   import {useAsyncData} from "#app";
 
   const page = ref(0)
-  watch(page, (newValue) => {
-    fetchPhones(newValue, 20);
+  const sort = ref('newest')
+  const perPage = ref(16)
+  watch([page, sort, perPage], ([newPage, newSort, newPerPage]) => {
+    fetchPhones(newPage, +newPerPage, newSort);
   });
+
 
   const changePageValue = (newValue) => {
     page.value = newValue
   }
 
-  const sort = ref('newest')
-
   const products = ref([]);
   watch(products, () => {
     fetchCount();
   });
-  const fetchPhones = async (offset, limit) => {
+  const fetchPhones = async (offset, limit, sort) => {
     const { loading, data } = await useAsyncQuery(GET_PHONES_QUERY, {
       pagination: {
         offset,
         limit,
       },
-    });
+      sort,
+    })
     products.value = data.value;
   };
-  fetchPhones(0, 20);
+  fetchPhones(page.value, perPage.value, sort.value);
 
   const phonesQuantity = ref({getPhonesCount: 1});
   const fetchCount = async () => {
@@ -90,7 +96,7 @@
   fetchCount();
 
   onMounted(async () => {
-    await fetchPhones(0, 20);
+    await fetchPhones(+page.value, +perPage.value, sort.value);
     await fetchCount();
   });
 
