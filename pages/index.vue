@@ -85,7 +85,7 @@
   import GET_PHONES_QUERY from "~/graphql/getPhones.query.gql";
   import ProductSlider from "~/components/UI/ProductSlider.vue";
 
-  const {data} = useAsyncQuery(
+  const {data} =  await useAsyncQuery(
       GET_PHONES_QUERY,
       {
         first: 10
