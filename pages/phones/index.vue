@@ -18,7 +18,7 @@
             v-model="sort">
           <option selected value="newest">Newest</option>
           <option value="cheapest">Cheapest</option>
-          <option value="discount">Discount</option>
+          <option value="discount">Best Price</option>
         </select>
       </div>
       <div class="flex flex-col">
@@ -36,38 +36,66 @@
     </div>
   </section>
   <section class="container">
-    <base-list class="mt-[24px]" :products="products.getPhones"></base-list>
+    <base-list class="mt-[24px]" :products="products?.getPhones"></base-list>
   </section>
   <section class="flex justify-center mt-[40px]">
     <the-pagination
-        :total="phonesQuantity.getPhonesCount"
+        :total="phonesQuantity?.getPhonesCount"
         per-page="20"
+        @changePage="changePageValue"
     >
 
     </the-pagination>
   </section>
 </template>
 <script setup>
-  import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
   import BaseRoute from "~/components/UI/BaseRoute.vue";
   import BaseList from "~/components/UI/BaseList.vue";
   import GET_PHONES_QUERY from "~/graphql/getPhones.query.gql";
   import GET_PHONES_COUNT_QUERY from "~/graphql/getPhonesCount.query.gql";
   import ThePagination from "~/components/Navigation/ThePagination.vue";
+  import {useAsyncData} from "#app";
+
+  const page = ref(0)
+  watch(page, (newValue) => {
+    fetchPhones(newValue, 20);
+  });
+
+  const changePageValue = (newValue) => {
+    page.value = newValue
+  }
+
   const sort = ref('newest')
-  const {data: products} = useAsyncQuery(
-      GET_PHONES_QUERY,
-      {
-        first: 18
-      }
-  )
-  const {data: phonesQuantity} = useAsyncQuery(
-      GET_PHONES_COUNT_QUERY
-  )
-  console.log(phonesQuantity.value)
+
+  const products = ref([]);
+  watch(products, () => {
+    fetchCount();
+  });
+  const fetchPhones = async (offset, limit) => {
+    const { loading, data } = await useAsyncQuery(GET_PHONES_QUERY, {
+      pagination: {
+        offset,
+        limit,
+      },
+    });
+    products.value = data.value;
+  };
+  fetchPhones(0, 20);
+
+  const phonesQuantity = ref({getPhonesCount: 1});
+  const fetchCount = async () => {
+    const { loading, data } = await useAsyncQuery(GET_PHONES_COUNT_QUERY);
+    phonesQuantity.value = data.value;
+  };
+  fetchCount();
+
+  onMounted(async () => {
+    await fetchPhones(0, 20);
+    await fetchCount();
+  });
 
 
   const route = useRoute()
       .name.split('/')
-  console.log(route)
+
 </script>
