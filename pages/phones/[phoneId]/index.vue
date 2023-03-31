@@ -1,8 +1,8 @@
 <template>
   <section class="mt-[25px] container">
-    <base-route :route="route"></base-route>
+    <base-route class="mt-[24px]" :route="route"></base-route>
     <back-button class="mt-[40px]" :route="backRoute"/>
-    <h2 class="mt-[16px]">{{ phone?.name }}</h2>
+    <h2 class="mt-[24px]">{{ phone?.name }}</h2>
     <section v-if="!isLoading" class="mt-[40px] grid grid-cols-2 gap-x-[64px] gap-y-[80px]">
       <photo-block :images="phone?.images" :mainImage="phone?.images[0]"></photo-block>
       <configuration-block v-if="configData" :product-data="configData"></configuration-block>
