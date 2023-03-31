@@ -4,6 +4,32 @@ schema {
     query: Query
 }
 
+type Description {
+    text: [String]
+    title: String
+}
+
+type ExtendedPhone {
+    camera: String
+    capacity: String
+    capacityAvailable: [String]
+    cell: [String]
+    color: String
+    colorsAvailable: [String]
+    description: [Description]
+    id: ID
+    images: [String]
+    name: String
+    namespaceId: String
+    priceDiscount: Int
+    priceRegular: Int
+    processor: String
+    ram: String
+    resolution: String
+    screen: String
+    zoom: String
+}
+
 type Phone {
     capacity: String
     category: String
@@ -22,6 +48,7 @@ type Phone {
 
 type Query {
     getAllPhones: [Phone]
+    getExtendedPhone(id: ID!): ExtendedPhone
     getPhones(first: Int, pagination: Pagination, sort: String): [Phone]
     getPhonesCount: Int
 }

@@ -1,0 +1,26 @@
+query GetExtendedPhone($id:ID!) {
+    getExtendedPhone(id:$id) {
+        id
+        camera
+        capacity
+        capacityAvailable
+        cell
+        color
+        colorsAvailable
+        description {
+            text
+            title
+        }
+        images
+        name
+        namespaceId
+        priceDiscount
+        priceRegular
+        processor
+        ram
+        resolution
+        screen
+        zoom
+    }
+
+}
