@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center space-x-[4px]">
+  <div class="flex items-center space-x-[4px] cursor-pointer" @click="goBack">
     <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
          viewBox="0 0 404.258 404.258" xml:space="preserve">
       <polygon points="289.927,18 265.927,0 114.331,202.129 265.927,404.258 289.927,386.258 151.831,202.129 "/>
@@ -21,7 +21,9 @@ export default {
       router.push({path: route})
     }
 
-    return {}
+    return {
+      goBack,
+    }
   }
 }
 </script>
