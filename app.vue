@@ -1,6 +1,6 @@
 <template>
   <div>
-   <NuxtLayout>
+   <NuxtLayout >
      <NuxtLoadingIndicator />
       <NuxtPage></NuxtPage>
    </NuxtLayout>
@@ -9,24 +9,24 @@
 
 <script setup>
  import '@/assets/css/main.css'
- import GET_PHONES_QUERY from "@/graphql/getPhones.query.gql";
- const asyncData = ref([])
 
- const {loading, data, error} = useAsyncQuery(
-     GET_PHONES_QUERY,
-     {
-       pagination:{
-         offset: 2,
-         limit: 10
-       }
-     }
- )
+ const {clients, getToken} = useApollo()
 
+ console.log(clients)
 
 </script>
 
 <style>
   * {
     font-family: 'Montserrat', sans-serif;
+  }
+  .page-enter-active,
+  .page-leave-active {
+    transition: all 0.4s;
+  }
+  .page-enter-from,
+  .page-leave-to {
+    opacity: 0;
+    filter: blur(1rem);
   }
 </style>

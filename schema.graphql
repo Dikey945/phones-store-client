@@ -2,6 +2,7 @@
 
 schema {
     query: Query
+    mutation: Mutation
 }
 
 type Description {
@@ -30,6 +31,10 @@ type ExtendedPhone {
     zoom: String
 }
 
+type Mutation {
+    register(email: String, password: String): User!
+}
+
 type Phone {
     capacity: String
     category: String
@@ -51,6 +56,12 @@ type Query {
     getExtendedPhone(id: ID!): ExtendedPhone
     getPhones(first: Int, pagination: Pagination, sort: String): [Phone]
     getPhonesCount: Int
+}
+
+type User {
+    email: String!
+    id: ID!
+    password: String!
 }
 
 input Pagination {
