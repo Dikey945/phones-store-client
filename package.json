@@ -26,6 +26,8 @@
     "@nuxtjs/tailwindcss": "^6.6.0",
     "@rollup/plugin-graphql": "^2.0.3",
     "@vue/apollo-composable": "^4.0.0-beta.4",
+    "@vueuse/core": "^9.13.0",
+    "@vueuse/nuxt": "^9.13.0",
     "dotenv": "^16.0.3",
     "graphql": "^15.8.0",
     "graphql-tag": "^2.12.6",

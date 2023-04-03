@@ -25,6 +25,7 @@ export default defineNuxtConfig({
       }
     ],
     '@nuxtjs/apollo',
+    '@vueuse/nuxt'
   ],
   plugins: [
     { src: '~/plugins/font-awesome.ts' },
@@ -33,6 +34,9 @@ export default defineNuxtConfig({
     color: 'green',
     height: '5px',
   },
+  // app: {
+  //   pageTransition: { name: 'page', mode: 'out-in' }
+  // },
   apollo: {
     clients: {
       default: {

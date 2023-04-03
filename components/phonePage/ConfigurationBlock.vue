@@ -15,6 +15,7 @@
               rounded-[100%]
               border-[0.5px]
               border-gray-200
+              cursor-pointer
               hover:border-black"
             :class="{activeColor: activeColor === color}"
             @click="changeColor(color)"
